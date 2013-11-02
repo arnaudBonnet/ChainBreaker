@@ -14,6 +14,9 @@ define(['GTween'], function(GTween) {
 		(params._alpha == undefined ? this._alpha = 1.0 : this._alpha = params._alpha);
 		(params._scale == undefined ? this._scale = 1.0 : this._scale = params._scale);
 		(params._tween == undefined ? this._tween = null : this._tween = params._tween);
+		(params._type == undefined ? this._type = 0 : this._type = params._type);
+		(params._color == undefined ? this._color = 1 : this._color = params._color);
+		(params._shape == undefined ? this._shape = 1 : this._shape = params._shape);
 	}
 
 	/**
@@ -37,7 +40,13 @@ define(['GTween'], function(GTween) {
 	ne gere que des images et dans notre cas il faudra aussi gerer des formes geometriques tracees au runtime.
 	*/
 	GSprite.prototype.draw = function(context) {
+		var width = context.canvas.width;
+		var height = context.canvas.height;
 
+		var stepX = width / 9;
+		var stepY = height / 9;
+
+		context.fillRect((this._position.x * stepX) + 1, (this._position.y * stepY) + 1, stepX - 2, stepY - 2);
 	};
 
 	return GSprite;

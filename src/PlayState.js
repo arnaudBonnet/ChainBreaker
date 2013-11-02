@@ -7,6 +7,17 @@ define(['TW/Utils/inherit', 'TW/GameLogic/GameState', 'TouchManager', 'Displayer
 
 	inherit(PlayState, gameState);
 
+
+	/**
+	Permet d'initialser le displayer et le board
+	*/
+	PlayState.prototype.init = function() {
+		var GSS = this.getGameStateStack();
+		GSS.shared.board.init();
+		var json = GSS.shared.board.boardToJSON();
+		this._displayer.init(json);
+	};
+
 	/**
 	Je me suis permis de declarer une fonction update qui va permettre de mettre a jour
 	regulierement l'etat PlayState (Et donc le board et les GSprite)
@@ -16,6 +27,7 @@ define(['TW/Utils/inherit', 'TW/GameLogic/GameState', 'TouchManager', 'Displayer
 			console.log("PlayState's update method has just been called. (we display it just one time otherwise it will looks untidy in the console.)");
 			this.updateDisplayed = true;
 		}
+		this._displayer.update(elapsedTime);
 	};
 
 	/**
@@ -26,6 +38,7 @@ define(['TW/Utils/inherit', 'TW/GameLogic/GameState', 'TouchManager', 'Displayer
 			console.log("Playstate's draw method has just been called. (we display it just one time otherwise it will looks untidy in the console.)");
 			this.updateDraw = true;
 		}
+		this._displayer.draw(context);
 	};
 
 	return PlayState;

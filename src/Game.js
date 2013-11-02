@@ -15,7 +15,9 @@ define(['TW/Utils/inherit', 'TW/GameLogic/GameStateStack', 'TW/GameLogic/Gameloo
 	Game.prototype.start = function(){
 		this.gameloop.start();
 		console.log('Game started, pushing PlayState on the stack !');
-		this.push(new PlayState());
+		var playState = new PlayState();
+		this.push(playState);
+		playState.init();
 	};
 
 	return Game;

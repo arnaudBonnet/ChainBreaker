@@ -22,6 +22,26 @@ define(['Bubble'], function(Bubble) {
 		console.log("Plateau initialisé !");
 	}
 
+	Board.prototype.init = function() {
+		//Should contain the same code as the Board's constructor.
+	};
+
+	/**
+	Return the snapshot of the board in JSON form.
+	*/
+	Board.prototype.boardToJSON = function() {
+		var jsonObj = {bubbles: []};
+
+		for (var i = 0; i < 9; i++) {
+			for (var j = 0; j < 9; j++) {
+				var bubbleRef = this._board[i][j];
+				jsonObj.bubbles.push({x: bubbleRef.x, y: bubbleRef.y, type: bubbleRef.type,
+									  color: bubbleRef.color, shape: bubbleRef.shape});
+			}
+		}
+		return jsonObj;
+	};
+
 	Board.prototype.playInput = function(x, y) {
 		// Si la case n'est pas adjacente ? On sort
 		if (checkIfAdjacent(x,y) === false) {
